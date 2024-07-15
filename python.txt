@@ -1,0 +1,22 @@
+import requests
+
+def search_movie(title, api_key):
+    url = f"http://www.omdbapi.com/?apikey={api_key}&t={title}"
+    response = requests.get(url)
+    data = response.json()
+
+    if data.get('Response') == 'True':
+        print(f"Title: {data['Title']}")
+        print(f"Year: {data['Year']}")
+        print(f"Genre: {data['Genre']}")
+        print(f"Plot: {data['Plot']}")
+        print(f"IMDb Rating: {data['imdbRating']}")
+        print(f"Director: {data['Director']}")
+        print(f"Actors: {data['Actors']}")
+    else:
+        print(f"Error: {data.get('Error')}")
+
+if __name__ == "__main__":
+    api_key = 'your_api_key_here'  # Replace with your actual OMDB API key
+    movie_title = input("Enter movie title: ")
+    search_movie(movie_title, api_key)
